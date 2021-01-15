@@ -24,6 +24,7 @@ class MainWindow(QtWidgets.QMainWindow, HomeWin.Ui_HomeWindow):
         self.btn_discard.clicked.connect(self.discard)
         self.btn_cancel.clicked.connect(self.cancel_purchase)
         self.btn_payout.clicked.connect(self.payout)
+        self.view_Inventory.triggered.connect(self.invDialog)
 
 
 

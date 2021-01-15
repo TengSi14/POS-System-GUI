@@ -262,16 +262,15 @@ class Ui_HomeWindow(object):
         
         self.view_Inventory = QtWidgets.QAction(MainWindow)
         self.view_Inventory.setObjectName("view_Inventory")
-        
         self.edit_modItem = QtWidgets.QAction(MainWindow)
         font = QtGui.QFont()
         font.setFamily("Montserrat")
-        self.edit_modItem.setFont(font)
-        self.edit_modItem.setObjectName("edit_modItem")
+        # self.edit_modItem.setFont(font)
+        # self.edit_modItem.setObjectName("edit_modItem")
         
         self.mb_File.addAction(self.file_Close)
         self.mb_View.addAction(self.view_Inventory)
-        self.mb_View.addAction(self.edit_modItem)
+        # self.mb_View.addAction(self.edit_modItem)
         self.menubar.addAction(self.mb_File.menuAction())
         self.menubar.addAction(self.mb_View.menuAction())
 
@@ -306,9 +305,9 @@ class Ui_HomeWindow(object):
         self.view_Inventory.setText(_translate("MainWindow", "View Inventory"))
         self.view_Inventory.setStatusTip(_translate("MainWindow", "View Item Inventory"))
         self.view_Inventory.setShortcut(_translate("MainWindow", "Ctrl+Shift+I"))
-        self.edit_modItem.setText(_translate("MainWindow", "Modify Item"))
-        self.edit_modItem.setStatusTip(_translate("MainWindow", "Modify Item"))
-        self.edit_modItem.setShortcut(_translate("MainWindow", "Ctrl+Shift+E"))
+        # self.edit_modItem.setText(_translate("MainWindow", "Modify Item"))
+        # self.edit_modItem.setStatusTip(_translate("MainWindow", "Modify Item"))
+        # self.edit_modItem.setShortcut(_translate("MainWindow", "Ctrl+Shift+E"))
 
 
 # if __name__ == "__main__":
