@@ -27,10 +27,24 @@ class MainWindow(QtWidgets.QMainWindow, HomeWin.Ui_HomeWindow):
         self.view_Inventory.triggered.connect(self.show_itemInv)
 
 
-
+    # ITEM INVENTORY TAB ===========================================================================
     def show_itemInv(self):
         self.invDialog.show()
-        
+        rowCount = 0
+
+        for itemId in self.item_dict:
+            ii_code = self.item_dict[itemId]['iCode']
+            ii_name = self.item_dict[itemId]['iName']
+            ii_qty = self.item_dict[itemId]['iQty']
+            ii_price = self.item_dict[itemId]['iPrice']
+            itmList = [ii_code, ii_name, ii_qty, ii_price]
+            #print(ii_code, ii_name, ii_qty, ii_price)
+            count = 0
+            while count <= 3:
+                self.invDialog.tableWidget.setItem(rowCount, count, QtWidgets.QTableWidgetItem(itmList[count]))
+                count += 1
+            rowCount += 1
+            self.invDialog.tableWidget.insertRow(self.invDialog.tableWidget.rowCount())     
 
     # ITEMS AVAILABLE ==============================================================================
     def getInventory(self):
@@ -41,13 +55,8 @@ class MainWindow(QtWidgets.QMainWindow, HomeWin.Ui_HomeWindow):
                 itm_cnt += 1
                 self.item_dict.update({itm_cnt:{'iCode':item[0],'iName':item[1],'iPrice':item[2],'iQty':item[3]}})
         invCsv.close()
-        print(self.item_dict)
 
     # ADD ITEMS ON INVENTORY =======================================================================    
-    def addItem(self):
-        pass
-
-
     def clear_allLineEdit(self):
         self.lineEdit_search.clear()
         self.lineEdit_iCode.clear()
@@ -56,7 +65,7 @@ class MainWindow(QtWidgets.QMainWindow, HomeWin.Ui_HomeWindow):
         self.lineEdit_iPrice.clear()
         self.lineEdit_sTotal.clear()  
 
-    # TABLE WIDGET ===(Table Manipulation)================================================================
+    # TABLE WIDGET FOR SOLD ITEMS===(Table Manipulation)=================================================
     def qTbl_update(self):
         tbl_txtList = [self.lineEdit_iCode.text(),self.lineEdit_iName.text(), self.lineEdit_pQty.text(), self.lineEdit_iPrice.text(), self.lineEdit_sTotal.text()]
         tbl_colCount = 0
@@ -93,10 +102,13 @@ class MainWindow(QtWidgets.QMainWindow, HomeWin.Ui_HomeWindow):
 
 
     def comp_payout(self, comp_total, comp_cash):
-        total = int(comp_total)
-        cash = int(comp_cash)
-        change = str(cash - total)
-        self.payoutDialog.lineEdit_change.setText(change)
+        try:
+            total = float(comp_total)
+            cash = float(comp_cash)
+            change = str(cash - total)
+            self.payoutDialog.lineEdit_change.setText(change)
+        except ValueError:
+            pass
 
     # CANCEL BUTTON ======================================================================================
     def cancel_purchase(self):
@@ -191,7 +203,7 @@ class QtyWindow(QtWidgets.QMainWindow, QtyWin.Ui_QtyWindow):
             try:
                 self.hide()
                 #for SubTotal
-                self.comp_iPrice = int(comp_iPrice)
+                self.comp_iPrice = float(comp_iPrice)
                 self.comp_pQty = int(comp_pQty)
                 self.comp_sTotal = self.comp_iPrice * self.comp_pQty
                 self.partnerDialog.lineEdit_sTotal.setText(str(self.comp_sTotal))
