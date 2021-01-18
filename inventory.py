@@ -25,8 +25,14 @@ class Ui_Dialog(object):
         self.tableWidget = QtWidgets.QTableWidget(self.tab_items)
         self.tableWidget.setGeometry(QtCore.QRect(10, 10, 571, 411))
         self.tableWidget.setObjectName("tableWidget")
-        self.tableWidget.setColumnCount(0)
-        self.tableWidget.setRowCount(0)
+        self.tableWidget.setColumnCount(4)
+        self.tableWidget.setRowCount(1)
+        col_nameList = ['Item Code', 'Item Name', 'Qty', 'Price']
+        self.tableWidget.setHorizontalHeaderLabels(col_nameList)
+        self.tableWidget.setColumnWidth(0, 120)
+        self.tableWidget.setColumnWidth(1, 280)
+        self.tableWidget.setColumnWidth(2, 80)
+        self.tableWidget.setColumnWidth(3, 100)
         
         self.tabWidget_Inventory.addTab(self.tab_items, "")
         
